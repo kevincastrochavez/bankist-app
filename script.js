@@ -61,6 +61,26 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const displayMovements = function (movements) {
+  containerMovements.innerHTML = '';
+
+  movements.forEach(function (move, index) {
+    const type = move > 0 ? 'deposit' : 'withdrawal';
+
+    const html = `<div class="movements__row">
+    <div class="movements__type movements__type--${type}">${
+      index + 1
+    } ${type}</div>
+    <div class="movements__value">${move}€</div>
+  </div>`;
+
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+
+displayMovements(account1.movements);
+// console.log(containerMovements.innerHTML);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -122,11 +142,11 @@ let arr = ['a', 'b', 'c', 'd', 'e'];
 // });
 
 // MAP
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
 
 // console.log(currencies.entries());
 
@@ -135,9 +155,9 @@ const currencies = new Map([
 // });
 
 // SET
-const currenciesUnique = new Set(['USD', 'GBP', 'UDS', 'EUR', 'EUR']);
-console.log(currenciesUnique);
+// const currenciesUnique = new Set(['USD', 'GBP', 'UDS', 'EUR', 'EUR']);
+// console.log(currenciesUnique);
 
-currenciesUnique.forEach(function (value, key, set) {
-  console.log(`${key}: ${value}`); // ARE THE SAME VALUE
-});
+// currenciesUnique.forEach(function (value, key, set) {
+//   console.log(`${key}: ${value}`); // ARE THE SAME VALUE
+// });
