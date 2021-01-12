@@ -220,7 +220,7 @@ GOOD LUCK 😀
 
 // const eurToUsd = 1.1;
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // const movementsUsd = movements.map(mov => mov * eurToUsd);
 
 // console.log(movements);
@@ -239,3 +239,17 @@ GOOD LUCK 😀
 // );
 
 // console.log(moveDes);
+
+///////////////////////////////////////
+// The filter Method
+
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+
+const withdrawls = movements.filter(function (mov) {
+  return mov < 0;
+});
+
+console.log(deposits);
+console.log(withdrawls);
