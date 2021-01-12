@@ -81,6 +81,19 @@ const displayMovements = function (movements) {
 displayMovements(account1.movements);
 // console.log(containerMovements.innerHTML);
 
+const createUsernames = function (accounts) {
+  accounts.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLocaleLowerCase()
+      .split(' ')
+      .map(word => word[0])
+      .join('');
+  });
+};
+
+createUsernames(accounts);
+console.log(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -88,7 +101,7 @@ displayMovements(account1.movements);
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
-let arr = ['a', 'b', 'c', 'd', 'e'];
+// let arr = ['a', 'b', 'c', 'd', 'e'];
 
 // // SLICE
 // console.log(arr.slice(2));
@@ -205,24 +218,24 @@ GOOD LUCK 😀
 ///////////////////////////////////////
 // The map Method
 
-const eurToUsd = 1.1;
+// const eurToUsd = 1.1;
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-const movementsUsd = movements.map(mov => mov * eurToUsd);
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movementsUsd = movements.map(mov => mov * eurToUsd);
 
-console.log(movements);
-console.log(movementsUsd);
+// console.log(movements);
+// console.log(movementsUsd);
 
-// Not best practice
-// const movementsUsdFor = [];
-// for (const mov of movements) movementsUsdFor.push(mov * eurToUsd);
-// console.log(movementsUsdFor);
+// // Not best practice
+// // const movementsUsdFor = [];
+// // for (const mov of movements) movementsUsdFor.push(mov * eurToUsd);
+// // console.log(movementsUsdFor);
 
-const moveDes = movements.map(
-  (mov, i) =>
-    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
-      mov
-    )}`
-);
+// const moveDes = movements.map(
+//   (mov, i) =>
+//     `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+//       mov
+//     )}`
+// );
 
-console.log(moveDes);
+// console.log(moveDes);
