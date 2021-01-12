@@ -81,6 +81,13 @@ const displayMovements = function (movements) {
 displayMovements(account1.movements);
 // console.log(containerMovements.innerHTML);
 
+const calcPrintBalance = function (movements) {
+  const balance = movements.reduce((acc, curr) => acc + curr);
+  labelBalance.textContent = `${balance}`;
+};
+
+calcPrintBalance(account1.movements);
+
 const createUsernames = function (accounts) {
   accounts.forEach(function (acc) {
     acc.username = acc.owner
@@ -92,7 +99,6 @@ const createUsernames = function (accounts) {
 };
 
 createUsernames(accounts);
-console.log(accounts);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -243,13 +249,30 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 ///////////////////////////////////////
 // The filter Method
 
-const deposits = movements.filter(function (mov) {
-  return mov > 0;
+// const deposits = movements.filter(function (mov) {
+//   return mov > 0;
+// });
+
+// const withdrawls = movements.filter(function (mov) {
+//   return mov < 0;
+// });
+
+// console.log(deposits);
+// console.log(withdrawls);
+
+///////////////////////////////////////
+// The reduce Method
+
+const balance = movements.reduce((acc, curr) => acc + curr);
+console.log(balance);
+
+//MAXIMUM VALUE
+const max = movements.reduce((acc, mov) => {
+  if (acc > mov) {
+    return acc;
+  } else {
+    return mov;
+  }
 });
 
-const withdrawls = movements.filter(function (mov) {
-  return mov < 0;
-});
-
-console.log(deposits);
-console.log(withdrawls);
+console.log(max);
