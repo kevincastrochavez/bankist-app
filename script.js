@@ -183,21 +183,46 @@ TEST DATA 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 GOOD LUCK 😀
 */
 
-const checkDogs = function (dogsJulia, dogsKate) {
-  const dogsJuliaCorrected = dogsJulia.slice(1, 3);
+// const checkDogs = function (dogsJulia, dogsKate) {
+//   const dogsJuliaCorrected = dogsJulia.slice(1, 3);
 
-  const juliaAndKateDogs = [...dogsJuliaCorrected, ...dogsKate];
-  console.log(juliaAndKateDogs);
+//   const juliaAndKateDogs = [...dogsJuliaCorrected, ...dogsKate];
+//   console.log(juliaAndKateDogs);
 
-  juliaAndKateDogs.forEach(function (year, index) {
-    const dogAge =
-      year >= 3
-        ? `Dog number ${index + 1} is an adult, and is ${year} years old`
-        : `Dog number ${index + 1} is still a puppy, and is ${year} years old`;
+//   juliaAndKateDogs.forEach(function (year, index) {
+//     const dogAge =
+//       year >= 3
+//         ? `Dog number ${index + 1} is an adult, and is ${year} years old`
+//         : `Dog number ${index + 1} is still a puppy, and is ${year} years old`;
 
-    console.log(dogAge);
-  });
-};
+//     console.log(dogAge);
+//   });
+// };
 
-checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
-checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+// checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+// checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+
+///////////////////////////////////////
+// The map Method
+
+const eurToUsd = 1.1;
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movementsUsd = movements.map(mov => mov * eurToUsd);
+
+console.log(movements);
+console.log(movementsUsd);
+
+// Not best practice
+// const movementsUsdFor = [];
+// for (const mov of movements) movementsUsdFor.push(mov * eurToUsd);
+// console.log(movementsUsdFor);
+
+const moveDes = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+      mov
+    )}`
+);
+
+console.log(moveDes);
