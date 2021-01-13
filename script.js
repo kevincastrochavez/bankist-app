@@ -78,26 +78,23 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
-// console.log(containerMovements.innerHTML);
-
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, curr) => acc + curr);
   labelBalance.textContent = `${balance}$`;
 };
 
-calcDisplayBalance(account1.movements);
-
-const calcDisplaySummary = function (movements) {
-  const incomes = movements
+const calcDisplaySummary = function (acc) {
+  const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov);
 
-  const out = movements.filter(mov => mov < 0).reduce((acc, mov) => acc + mov);
+  const out = acc.movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov);
 
-  const interest = movements
+  const interest = acc.movements
     .filter(mov => mov > 0)
-    .map(deposit => (deposit * 1.2) / 100)
+    .map(deposit => (deposit * acc.interestRate) / 100)
     .filter(int => int >= 1)
     .reduce((acc, int) => acc + int);
 
@@ -105,8 +102,6 @@ const calcDisplaySummary = function (movements) {
   labelSumOut.textContent = `${Math.abs(out)}$`;
   labelSumInterest.textContent = `${interest}$`;
 };
-
-calcDisplaySummary(account1.movements);
 
 const createUsernames = function (accounts) {
   accounts.forEach(function (acc) {
@@ -119,6 +114,37 @@ const createUsernames = function (accounts) {
 };
 
 createUsernames(accounts);
+
+///////////////////////////////////////
+// Event handlers
+
+let currentAccount;
+
+btnLogin.addEventListener('click', function (event) {
+  event.preventDefault();
+
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+
+    containerApp.style.opacity = 100;
+
+    inputLoginUsername.value = '';
+    inputLoginPin.value = '';
+    inputLoginPin.blur();
+
+    displayMovements(currentAccount.movements);
+    calcDisplayBalance(currentAccount.movements);
+    calcDisplaySummary(currentAccount);
+  } else {
+    console.log('Incorrect Username or Password');
+  }
+});
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -368,10 +394,10 @@ GOOD LUCK 😀
 ///////////////////////////////////////
 // The find Method
 
-const firstWithdral = movements.find(mov => mov < 0);
-console.log(firstWithdral);
+// const firstWithdral = movements.find(mov => mov < 0);
+// console.log(firstWithdral);
 
-console.log(accounts);
+// console.log(accounts);
 
-const account = accounts.find(acc => acc.owner === 'Jessica Davis');
-console.log(account);
+// const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+// console.log(account);
