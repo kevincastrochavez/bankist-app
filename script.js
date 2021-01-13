@@ -354,13 +354,24 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 GOOD LUCK 😀
 */
 
-const calcAverageHumanAge = ages => {
-  const humanAges = ages
-    .map(dogAge => (dogAge <= 2 ? 2 * dogAge : 16 + dogAge * 4))
-    .filter(age => age >= 18)
-    .reduce((acc, age, _, arr) => acc + age / arr.length, 0);
+// const calcAverageHumanAge = ages => {
+//   const humanAges = ages
+//     .map(dogAge => (dogAge <= 2 ? 2 * dogAge : 16 + dogAge * 4))
+//     .filter(age => age >= 18)
+//     .reduce((acc, age, _, arr) => acc + age / arr.length, 0);
 
-  return humanAges;
-};
+//   return humanAges;
+// };
 
-console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
+// console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
+
+///////////////////////////////////////
+// The find Method
+
+const firstWithdral = movements.find(mov => mov < 0);
+console.log(firstWithdral);
+
+console.log(accounts);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
