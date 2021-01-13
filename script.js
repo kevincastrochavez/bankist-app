@@ -61,10 +61,12 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
 
-  movements.forEach(function (move, index) {
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (move, index) {
     const type = move > 0 ? 'deposit' : 'withdrawal';
 
     const html = `<div class="movements__row">
@@ -218,6 +220,15 @@ btnClose.addEventListener('click', function (e) {
   inputClosePin.value = '';
   inputCloseUsername.value = '';
   inputClosePin.blur();
+});
+
+let sorted = false;
+
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 
 /////////////////////////////////////////////////
@@ -488,20 +499,46 @@ GOOD LUCK 😀
 ///////////////////////////////////////
 // FLAT AND FLATMAP
 
-const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
-console.log(arr.flat());
+// const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
 
-const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
-console.log(arrDeep.flat(2));
+// console.log(arr.flat());
 
-const overallBalance = accounts
-  .map(acc => acc.movements)
-  .flat()
-  .reduce((acc, mov) => acc + mov);
+// const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+// console.log(arrDeep.flat(2));
 
-const overallBalance2 = accounts
-  .flatMap(acc => acc.movements)
-  .reduce((acc, mov) => acc + mov);
+// const overallBalance = accounts
+//   .map(acc => acc.movements)
+//   .flat()
+//   .reduce((acc, mov) => acc + mov);
 
-console.log(overallBalance);
-console.log(overallBalance2);
+// const overallBalance2 = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((acc, mov) => acc + mov);
+
+// console.log(overallBalance);
+// console.log(overallBalance2);
+
+///////////////////////////////////////
+// Sorting ARRAYS
+
+const owners = ['Kevin', 'Zack', 'Adam', 'Cindy'];
+console.log(owners.sort()); // Mutates the array
+
+// return < 0, A, B (keep order)
+// return > 0, B, A (switch order)
+
+// Ascending;
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+// Descending;
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log(movements);
