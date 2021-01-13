@@ -178,6 +178,22 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    currentAccount.movements.push(amount);
+    updateUI(currentAccount);
+
+    inputLoanAmount.value = '';
+    console.log(`The bank lend you ${amount}`);
+  } else {
+    console.log('Loan not authorized');
+  }
+});
+
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -459,3 +475,12 @@ GOOD LUCK 😀
 
 // const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 // console.log(account);
+
+///////////////////////////////////////
+// SOME AND EVERY
+
+const anyDeposits = movements.some(mov => mov > 0);
+console.log(anyDeposits);
+
+const allDeposits = movements.every(mov => mov > 0);
+console.log(allDeposits);
