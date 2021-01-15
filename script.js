@@ -521,8 +521,8 @@ GOOD LUCK 😀
 ///////////////////////////////////////
 // Sorting ARRAYS
 
-const owners = ['Kevin', 'Zack', 'Adam', 'Cindy'];
-console.log(owners.sort()); // Mutates the array
+// const owners = ['Kevin', 'Zack', 'Adam', 'Cindy'];
+// console.log(owners.sort()); // Mutates the array
 
 // return < 0, A, B (keep order)
 // return > 0, B, A (switch order)
@@ -546,33 +546,121 @@ console.log(owners.sort()); // Mutates the array
 ///////////////////////////////////////
 // More Ways of Creating and Filling Arrays
 
-const arr = [1, 2, 3, 4, 5, 6, 7];
-console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+// const arr = [1, 2, 3, 4, 5, 6, 7];
+// console.log(new Array(1, 2, 3, 4, 5, 6, 7));
 
-// Emprty arrays + fill method
-const x = new Array(7);
-console.log(x);
-// console.log(x.map(() => 5));
-x.fill(1, 3, 5);
-x.fill(1);
-console.log(x);
+// // Emprty arrays + fill method
+// const x = new Array(7);
+// console.log(x);
+// // console.log(x.map(() => 5));
+// x.fill(1, 3, 5);
+// x.fill(1);
+// console.log(x);
 
-arr.fill(23, 2, 6);
-console.log(arr);
+// arr.fill(23, 2, 6);
+// console.log(arr);
 
-// Array.from
-const y = Array.from({ length: 7 }, () => 1);
-console.log(y);
+// // Array.from
+// const y = Array.from({ length: 7 }, () => 1);
+// console.log(y);
 
-const z = Array.from({ length: 7 }, (_, i) => i + 1);
-console.log(z);
+// const z = Array.from({ length: 7 }, (_, i) => i + 1);
+// console.log(z);
 
-labelBalance.addEventListener('click', function () {
-  const movementsUI = Array.from(
-    document.querySelectorAll('.movements__value'),
-    el => Number(el.textContent.replace('$', ''))
-  );
-  console.log(movementsUI);
+// labelBalance.addEventListener('click', function () {
+//   const movementsUI = Array.from(
+//     document.querySelectorAll('.movements__value'),
+//     el => Number(el.textContent.replace('$', ''))
+//   );
+//   console.log(movementsUI);
 
-  const movementsUI2 = [...document.querySelectorAll('.movements__value')];
-});
+//   const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+// });
+
+///////////////////////////////////////
+// Coding Challenge #4
+
+/* 
+Julia and Kate are still studying dogs, and this time they are studying if dogs are eating too much or too little.
+Eating too much means the dog's current food portion is larger than the recommended portion, and eating too little is the opposite.
+Eating an okay amount means the dog's current food portion is within a range 10% above and 10% below the recommended portion (see hint).
+
+1. Loop over the array containing dog objects, and for each dog, calculate the recommended food portion and add it to the object as a new property. Do NOT create a new array, simply loop over the array. Forumla: recommendedFood = weight ** 0.75 * 28. (The result is in grams of food, and the weight needs to be in kg)
+2. Find Sarah's dog and log to the console whether it's eating too much or too little. HINT: Some dogs have multiple owners, so you first need to find Sarah in the owners array, and so this one is a bit tricky (on purpose) 🤓
+3. Create an array containing all owners of dogs who eat too much ('ownersEatTooMuch') and an array with all owners of dogs who eat too little ('ownersEatTooLittle').
+4. Log a string to the console for each array created in 3., like this: "Matilda and Alice and Bob's dogs eat too much!" and "Sarah and John and Michael's dogs eat too little!"
+5. Log to the console whether there is any dog eating EXACTLY the amount of food that is recommended (just true or false)
+6. Log to the console whether there is any dog eating an OKAY amount of food (just true or false)
+7. Create an array containing the dogs that are eating an OKAY amount of food (try to reuse the condition used in 6.)
+8. Create a shallow copy of the dogs array and sort it by recommended food portion in an ascending order (keep in mind that the portions are inside the array's objects)
+
+HINT 1: Use many different tools to solve these challenges, you can use the summary lecture to choose between them 😉
+HINT 2: Being within a range 10% above and below the recommended portion means: current > (recommended * 0.90) && current < (recommended * 1.10). Basically, the current portion should be between 90% and 110% of the recommended portion.
+
+TEST DATA:
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] }
+];
+
+GOOD LUCK 😀
+*/
+
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+];
+
+// 1.
+dogs.forEach(dog => (dog.recPortion = Math.trunc(dog.weight ** 0.75 * 28)));
+console.log(dogs);
+
+// 2.
+const sarahDog = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(sarahDog);
+console.log(
+  `Sarah's dog is eating ${
+    sarahDog.curFood > sarahDog.recPortion ? 'Too much' : 'Too many'
+  }`
+);
+
+// 3.
+const ownersEatTooMuch = dogs
+  .filter(dog => dog.curFood > dog.recPortion)
+  .flatMap(dog => dog.owners);
+console.log(ownersEatTooMuch);
+
+const ownersEatTooLittle = dogs
+  .filter(dog => dog.curFood < dog.recPortion)
+  .flatMap(dog => dog.owners);
+console.log(ownersEatTooLittle);
+
+// 4.
+const arr1 = ownersEatTooMuch.join(' and ');
+console.log(`${arr1}'s dogs eat too much`);
+
+const arr2 = ownersEatTooLittle.join(' and ');
+console.log(`${arr2}'s dogs eat too little`);
+
+// 5.
+const exactAmount = dogs.some(dog => dog.curFood === dog.recPortion);
+console.log(exactAmount);
+
+// 6.
+const checkEatingOkay = dog =>
+  dog.curFood > dog.recPortion * 0.9 && dog.curFood < dog.recPortion * 1.1;
+
+const okayAmount = dogs.some(checkEatingOkay);
+console.log(okayAmount);
+
+// 7.
+const eatingOkay = dogs.filter(checkEatingOkay);
+console.log(eatingOkay);
+
+// 8.
+const dogsSorted = dogs.slice().sort((a, b) => a.recPortion - b.recPortion);
+console.log(dogsSorted);
